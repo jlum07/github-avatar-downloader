@@ -1,3 +1,6 @@
+#github token key file
+secrets.js
+
 # Logs
 logs
 *.log
