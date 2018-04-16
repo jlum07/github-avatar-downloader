@@ -1,6 +1,9 @@
 #github token key file
 secrets.js
 
+#ignore avatar folder
+avatars/
+
 # Logs
 logs
 *.log
