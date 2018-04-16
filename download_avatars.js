@@ -34,9 +34,6 @@ getRepoContributors(rOwner, rName, function(err, result) {
 
   var contributorsOjb = JSON.parse(result);
 
-  // console.log("Errors:", err);
-  // console.log("Result:", contributorsOjb);
-
   for (var objs of contributorsOjb) {
     downloadImageByURL(objs['avatar_url'], objs['login']);
   }
