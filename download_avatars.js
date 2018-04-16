@@ -3,6 +3,10 @@ var fs = require('fs');
 
 var ghToken = require('./secrets.js')
 
+var args = process.argv;
+var rOwner = args[2];
+var rName = args[3];
+
 console.log('Welcome to the GitHub Avatar Downloader!');
 
 function getRepoContributors(repoOwner, repoName, cb) {
@@ -15,18 +19,23 @@ function getRepoContributors(repoOwner, repoName, cb) {
     }
   };
 
+  if (!repoOwner || !repoName) {
+    console.log('Error: you must enter both a repo owner and name');
+    return;
+  }
+
   request(options, function(err, res, body) {
     cb(err, body);
   });
 }
 
 
-getRepoContributors("jquery", "jquery", function(err, result) {
+getRepoContributors(rOwner, rName, function(err, result) {
 
   var contributorsOjb = JSON.parse(result);
 
-  console.log("Errors:", err);
-  console.log("Result:", contributorsOjb);
+  // console.log("Errors:", err);
+  // console.log("Result:", contributorsOjb);
 
   for (var objs of contributorsOjb) {
     downloadImageByURL(objs['avatar_url'], objs['login']);
@@ -41,4 +50,5 @@ function downloadImageByURL(url, filePath) {
         throw err;
       })
       .pipe(fs.createWriteStream('./avatars/'+ filePath +'')); // cant add extension or some files wont open in file manager
+
 }
