@@ -62,7 +62,7 @@ function downloadImageByURL(url, filePath) {
 
       // })
       // .pipe(fs.createWriteStream('./avatars/'+ filePath +'.jpg'));
-      // .pipe(fs.createWriteStream('./'+filePath));
+      .pipe(fs.createWriteStream('./'+filePath));
 
 }
 
