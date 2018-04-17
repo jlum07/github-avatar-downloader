@@ -42,19 +42,12 @@ getRepoContributors(rOwner, rName, function(err, result) {
 
 function downloadImageByURL(url, filePath) {
 
-  // var fileType;
-
   request.get(url)
       .on('error', function (err) {
         throw err;
       })
       .on('response', function (response) {
-        var fileType = response.headers['content-type'].slice(6);
-        // console.log('./avatars/'+ filePath + '.' + response.headers['content-type'].slice(6));
+        let fileType = response.headers['content-type'].slice(6);
         response.pipe(fs.createWriteStream('./avatars/'+ filePath + '.' + fileType));
       })
-      // .pipe(fs.createWriteStream('./avatars/'+ filePath)); // cant add extension or some files wont open in file manager
-      // .pipe(fs.createWriteStream('./avatars/'+ filePath + '.' + fileType)); // if i use this line instead of the one above and uncomment the .on response above file types are undefined.. pipe is running before the .on function
-
-      // console.log('./avatars/'+ filePath + '.' + fileType); //this return undefined for file type.. for some reason pipe is being run before .on response
-}
+  }
